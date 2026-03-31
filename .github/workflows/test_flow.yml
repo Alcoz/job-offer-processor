@@ -1,7 +1,16 @@
 name: Run test flow
 
+on:
+  push:
+    branches:
+      - '**'
+
+  pull_request:
+    branches:
+      - main
+
 jobs:
-  uv-example:
+  test-lint-job:
     name: python
     runs-on: ubuntu-latest
 
