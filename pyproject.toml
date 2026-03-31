@@ -4,9 +4,21 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.9"
-dependencies = []
+dependencies = [
+    "data-eng",
+    "minio>=7.2.20",
+    "pre-commit>=4.3.0",
+    "pytest>=8.4.2",
+    "python-dotenv>=1.2.1",
+    "requests>=2.32.5",
+    "ruff>=0.15.8",
+    "urllib3<2",
+]
 
 [tool.uv.workspace]
 members = [
     "data-eng",
 ]
+
+[tool.uv.sources]
+data-eng = { workspace = true }
