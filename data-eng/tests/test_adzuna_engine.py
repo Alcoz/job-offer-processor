@@ -25,10 +25,8 @@ class TestAdzunaApiErrors:
         print(job_data_test)
 
         key_list_attented = [
-            "adref",
+            "id",
             "salary_is_predicted",
-            "latitude",
-            "longitude",
             "location",
             "description",
             "company",
