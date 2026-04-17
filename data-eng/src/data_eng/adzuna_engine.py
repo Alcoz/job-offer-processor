@@ -1,6 +1,6 @@
 import requests
 
-ADZUNA_API_URL = "http://api.adzuna.com/v1/api/jobs/gb/search/1?app_id={adzuna_api_id}&app_key={adzuna_api_key}&results_per_page=20&what=data%20engineer&content-type=application/json"
+ADZUNA_API_URL = "http://api.adzuna.com/v1/api/jobs/fr/search/1?app_id={adzuna_api_id}&app_key={adzuna_api_key}&results_per_page=1000&what=data%20engineer&content-type=application/json"
 
 
 def adzuna_job_offers_getter(adzuna_api_id, adzuna_api_key):
@@ -21,19 +21,20 @@ def adzuna_job_offers_cleaner(adzuna_job_offers):
     adzuna_job_list_cleaned = []
 
     for job_offer in adzuna_job_offers:
-        job_offer_clean = {
-            "id": job_offer["id"],
-            "company": job_offer["company"]["display_name"],
-            "title": job_offer["title"],
-            "description": job_offer["description"],
-            "latitude": job_offer.get("latitude", ""),
-            "longitude": job_offer.get("longitude", ""),
-            "location": job_offer["location"]["display_name"],
-        }
+        job_offer["company"] = job_offer["company"]["display_name"]
+        job_offer["location"] = (job_offer["location"]["display_name"],)
 
-        if job_offer["salary_is_predicted"] == "1":
-            job_offer_clean["salary_min"] = job_offer["salary_min"]
-            job_offer_clean["salary_max"] = job_offer["salary_max"]
+        job_offer_clean = {
+            "title": job_offer.get("title", ""),
+            "created": job_offer.get("created"),
+            "company": job_offer.get("company"),
+            "location": job_offer.get("location"),
+            "longitude": job_offer.get("longitude"),
+            "latitude": job_offer.get("latitude"),
+            "salary_min": job_offer.get("salary_min"),
+            "salary_max": job_offer.get("salary_max"),
+            "redirect_url": job_offer.get("redirect_url"),
+        }
 
         adzuna_job_list_cleaned.append(job_offer_clean)
 
